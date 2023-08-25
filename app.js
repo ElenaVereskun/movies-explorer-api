@@ -15,8 +15,7 @@ const limiter = rateLimit({
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-const usersRouters = require('./routes/users');
-const moviesRouters = require('./routes/movies');
+const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -38,8 +37,7 @@ app.use(
 );
 
 app.use(requestLogger);
-app.use(usersRouters);
-app.use(moviesRouters);
+app.use(routes);
 app.use(errorLogger);
 app.use(limiter);
 app.use('*', () => {

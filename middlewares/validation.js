@@ -4,13 +4,10 @@ const { regexEmail, regexLink } = require('../utils/regex');
 module.exports.validationCreateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().max(30).min(2),
-    about: Joi.string().max(30).min(2),
     email: Joi.string()
       .required()
       .pattern(regexEmail),
     password: Joi.string().required(),
-    avatar: Joi.string()
-      .pattern(regexLink),
   }),
 });
 
@@ -23,38 +20,38 @@ module.exports.validationLogin = celebrate({
   }),
 });
 
-module.exports.validationCreateCard = celebrate({
+module.exports.validationPostMovie = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().max(30).min(2),
-    link: Joi.string().required()
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.string().required(),
+    description: Joi.string().required(),
+    image: Joi.string().required()
       .pattern(regexLink),
-  }),
-});
-
-module.exports.validationUpdateAvatar = celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string().required()
+    trailerLink: Joi.string().required()
       .pattern(regexLink),
+    thumbnail: Joi.string().required()
+      .pattern(regexLink),
+    owner: Joi.object().required(),
+    movieId: Joi.string().hex().required().max(24)
+      .min(24),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });
 
 module.exports.validationUpdateProfile = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().max(30).min(2),
-    about: Joi.string().required().max(30).min(2),
+    email: Joi.string().required()
+      .pattern(regexEmail),
   }),
 });
 
-module.exports.validationCardId = celebrate({
+module.exports.validationMoviesId = celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().hex().required().max(24)
-      .min(24),
-  }),
-});
-
-module.exports.validationUserId = celebrate({
-  params: Joi.object().keys({
-    userId: Joi.string().hex().required().max(24)
+    movieId: Joi.string().hex().required().max(24)
       .min(24),
   }),
 });

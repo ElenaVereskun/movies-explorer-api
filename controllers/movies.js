@@ -26,8 +26,9 @@ module.exports.postMovie = (req, res, next) => {
     nameRU,
     nameEN,
     thumbnail,
-    movieId,
   } = req.body;
+  const owner = req.user._id;
+  const movieId = req.body._id;
   return Movies.create({
     country,
     director,
@@ -40,6 +41,7 @@ module.exports.postMovie = (req, res, next) => {
     nameEN,
     thumbnail,
     movieId,
+    owner,
   })
     .then((movie) => res.status(STATUS_CREATED).send(movie))
     .catch((err) => {
@@ -49,6 +51,19 @@ module.exports.postMovie = (req, res, next) => {
     })
     .catch(next);
 };
+
+/* module.exports.createCard = (req, res, next) => {
+  const { name, link } = req.body;
+  const owner = req.user._id;
+  return Card.create({ name, link, owner })
+    .then((card) => res.status(STATUS_CREATED).send(card))
+    .catch((err) => {
+      if (err instanceof mongoose.Error.ValidationError) {
+        throw new BadRequestError('Переданы некорректные данные');
+      }
+    })
+    .catch(next);
+}; */
 
 /* возвращает все сохранённые текущим пользователем фильмы */
 
