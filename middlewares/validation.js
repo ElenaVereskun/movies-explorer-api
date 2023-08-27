@@ -33,8 +33,7 @@ module.exports.validationPostMovie = celebrate({
       .pattern(regexLink),
     thumbnail: Joi.string().required()
       .pattern(regexLink),
-    owner: Joi.object().required(),
-    movieId: Joi.string().hex().required().max(24)
+    owner: Joi.string().hex().required().max(24)
       .min(24),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
@@ -51,7 +50,7 @@ module.exports.validationUpdateProfile = celebrate({
 
 module.exports.validationMoviesId = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().hex().required().max(24)
+    movieId: Joi.string().hex().max(24)
       .min(24),
   }),
 });
