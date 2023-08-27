@@ -3,6 +3,7 @@ const Movies = require('../models/movies');
 
 const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-error');
+const Forbidden = require('../errors/forbidden');
 
 const STATUS_OK = 200;
 const STATUS_CREATED = 201;
@@ -56,6 +57,8 @@ module.exports.deleteMovies = (req, res, next) => {
       if (String(movie.owner) === String(req.user._id)) {
         Movies.deleteOne(movie)
           .then(() => res.status(STATUS_OK).send(movie));
+      } else {
+        next(new Forbidden('Ошибка доступа'));
       }
     })
     .catch(next);
