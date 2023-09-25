@@ -2,7 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const helmet = require('helmet');
 
-const { PORT = 3001, DB_ADDRESS = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
+const { PORT = 4001, DB_ADDRESS = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 const app = express();
 
 const rateLimit = require('express-rate-limit');
@@ -32,7 +32,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(
   cors({
-    origin: ['http://localhost:3000',
+    origin: ['http://localhost:4000',
       'https://vereskun.nomoredomainsicu.ru',
       'https://api.nomoreparties.co/beatfilm-movies'],
   }),
