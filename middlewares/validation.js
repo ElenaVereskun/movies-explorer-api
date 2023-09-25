@@ -33,10 +33,11 @@ module.exports.validationPostMovie = celebrate({
       .pattern(regexLink),
     thumbnail: Joi.string().required()
       .pattern(regexLink),
-    owner: Joi.string().hex().required().max(24)
+    owner: Joi.string().hex().max(24)
       .min(24),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
+    movieId: Joi.number(),
   }),
 });
 
