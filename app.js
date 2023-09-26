@@ -15,6 +15,7 @@ const limiter = rateLimit({
 const cors = require('cors');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
+const corsHeadler = require('./middlewares/cors');
 const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 
@@ -30,14 +31,7 @@ mongoose.connect(DB_ADDRESS, {
 app.use(helmet());
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: ['http://localhost:3000',
-      'https://vereskun.nomoredomainsicu.ru',
-      'https://api.nomoreparties.co/beatfilm-movies'],
-  }),
-);
-
+app.use(cors(corsHeadler));
 app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);
