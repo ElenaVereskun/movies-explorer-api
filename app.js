@@ -12,7 +12,7 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: 'Too many request from this IP',
 });
-const cors = require('cors');
+
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const corsHeadler = require('./middlewares/cors');
@@ -31,7 +31,7 @@ mongoose.connect(DB_ADDRESS, {
 app.use(helmet());
 
 app.use(express.json());
-app.use(cors(corsHeadler));
+app.use(corsHeadler);
 app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);

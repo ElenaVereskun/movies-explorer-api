@@ -1,10 +1,9 @@
 // Массив доменов, с которых разрешены кросс-доменные запросы
 const allowedCors = [
-  ['http://localhost:4000',
-    'https://vereskun.nomoredomainsicu.ru',
-    'https://api.vereskun.nomoredomainsicu.ru',
-    'https://api.nomoreparties.co/beatfilm-movies'],
-];
+  'http://localhost:4000',
+  'https://vereskun.nomoredomainsicu.ru',
+  'https://api.vereskun.nomoredomainsicu.ru',
+  'https://api.nomoreparties.co/beatfilm-movies'];
 
 const corsHeadler = (req, res, next) => {
   const { origin } = req.headers;
