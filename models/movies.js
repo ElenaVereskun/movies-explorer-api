@@ -50,13 +50,13 @@ const moviesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  likes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'user',
-      default: [],
-    },
-  ],
+/*   id: {
+    type: Number,
+    required: true,
+  },
+  movieId: {
+    type: Number,
+  }, */
 });
 
 module.exports = mongoose.model('movies', moviesSchema);
@@ -64,4 +64,11 @@ module.exports = mongoose.model('movies', moviesSchema);
 /*   movieId: {
     type: Number,
     required: true,
-  }, */
+  },
+likes: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    default: [],
+  },
+], */
