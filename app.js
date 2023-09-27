@@ -15,7 +15,8 @@ const limiter = rateLimit({
 
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
-const corsHeadler = require('./middlewares/cors');
+/* const corsHeadler = require('./middlewares/cors'); */
+const cors = require('cors');
 const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 
@@ -31,7 +32,16 @@ mongoose.connect(DB_ADDRESS, {
 app.use(helmet());
 
 app.use(express.json());
-app.use(corsHeadler);
+/* app.use(corsHeadler); */
+app.use(
+  cors({
+    origin: [
+      'http://localhost:4000',
+      'https://vereskun.nomoredomainsicu.ru',
+      'https://api.vereskun.nomoredomainsicu.ru',
+      'https://api.nomoreparties.co/beatfilm-movies'],
+  }),
+);
 app.use(requestLogger);
 app.use(routes);
 app.use(errorLogger);
