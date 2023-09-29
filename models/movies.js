@@ -50,25 +50,10 @@ const moviesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-/*   id: {
+  movieId: {
     type: Number,
     required: true,
   },
-  movieId: {
-    type: Number,
-  }, */
 });
 
 module.exports = mongoose.model('movies', moviesSchema);
-
-/*   movieId: {
-    type: Number,
-    required: true,
-  },
-likes: [
-  {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
-    default: [],
-  },
-], */

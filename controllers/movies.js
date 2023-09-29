@@ -3,7 +3,7 @@ const Movies = require('../models/movies');
 
 const NotFoundError = require('../errors/not-found-err');
 const BadRequestError = require('../errors/bad-request-error');
-const Forbidden = require('../errors/forbidden');
+/* const Forbidden = require('../errors/forbidden'); */
 
 const STATUS_OK = 200;
 const STATUS_CREATED = 201;
@@ -20,6 +20,7 @@ module.exports.postMovie = (req, res, next) => {
     thumbnail,
     nameRU,
     nameEN,
+    movieId,
   } = req.body;
   const owner = req.user._id;
   return Movies.create({
@@ -34,6 +35,7 @@ module.exports.postMovie = (req, res, next) => {
     nameRU,
     nameEN,
     owner,
+    movieId,
   })
     .then((movie) => res.status(STATUS_CREATED).send(movie))
     .catch((err) => {
@@ -45,11 +47,10 @@ module.exports.postMovie = (req, res, next) => {
 };
 
 module.exports.getMovies = (req, res) => {
-  const { owner } = req.body;
-  Movies.find({ owner })
-    .then((movie) => res.status(STATUS_OK).send(movie));
+  Movies.find({ owner: req.user._id })
+    .then((movies) => res.status(STATUS_OK).send(movies));
 };
-
+/*
 module.exports.deleteMovies = (req, res, next) => {
   Movies.findById(req.params.movieId)
     .orFail(new NotFoundError('Удаление фильма с несуществующим в БД id'))
@@ -61,5 +62,12 @@ module.exports.deleteMovies = (req, res, next) => {
         next(new Forbidden('Ошибка доступа'));
       }
     })
+    .catch(next);
+}; */
+
+module.exports.deleteMovies = (req, res, next) => {
+  Movies.findByIdAndDelete(req.params.movieId)
+    .orFail(new NotFoundError('Удаление фильма с несуществующим в БД id'))
+    .then((movie) => res.status(STATUS_OK).send(movie))
     .catch(next);
 };

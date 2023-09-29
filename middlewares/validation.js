@@ -37,8 +37,7 @@ module.exports.validationPostMovie = celebrate({
       .min(24),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
-    /*     movieId: Joi.number(),
-        id: Joi.number().required(), */
+    movieId: Joi.number().required(),
   }),
 });
 
@@ -52,7 +51,6 @@ module.exports.validationUpdateProfile = celebrate({
 
 module.exports.validationMoviesId = celebrate({
   params: Joi.object().keys({
-    movieId: Joi.string().hex().max(24)
-      .min(24),
+    movieId: Joi.string().required(),
   }),
 });
