@@ -48,9 +48,3 @@ module.exports.validationUpdateProfile = celebrate({
       .pattern(regexEmail),
   }),
 });
-
-module.exports.validationMoviesId = celebrate({
-  params: Joi.object().keys({
-    movieId: Joi.string().required(),
-  }),
-});

@@ -50,20 +50,6 @@ module.exports.getMovies = (req, res) => {
   Movies.find({ owner: req.user._id })
     .then((movies) => res.status(STATUS_OK).send(movies));
 };
-/*
-module.exports.deleteMovies = (req, res, next) => {
-  Movies.findById(req.params.movieId)
-    .orFail(new NotFoundError('Удаление фильма с несуществующим в БД id'))
-    .then((movie) => {
-      if (String(movie.owner) === String(req.user._id)) {
-        Movies.deleteOne(movie)
-          .then(() => res.status(STATUS_OK).send(movie));
-      } else {
-        next(new Forbidden('Ошибка доступа'));
-      }
-    })
-    .catch(next);
-}; */
 
 module.exports.deleteMovies = (req, res, next) => {
   Movies.findByIdAndDelete(req.params.movieId)
